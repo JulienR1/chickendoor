@@ -1,0 +1,21 @@
+{
+	"name": "chickendoor",
+	"version": "1.0.0",
+	"description": "Automatic door for a backyard chicken coop powered by a car window motor, controlled with a esp32 microcontroller and operated through websockets via a custom website.",
+	"main": "index.js",
+	"scripts": {
+		"start": "concurrently \"npm run start:cloudService\" \"npm run start:webApp\"",
+		"start:cloudService": "cd cloudService && npm run dev",
+		"start:webApp": "cd webApp && npm run dev"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JulienR1/chickendoor.git"
+	},
+	"author": "Julien Rousseau",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/JulienR1/chickendoor/issues"
+	},
+	"homepage": "https://github.com/JulienR1/chickendoor#readme"
+}
