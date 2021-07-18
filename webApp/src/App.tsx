@@ -4,10 +4,12 @@ import "./App.css";
 import socketIOClient from "socket.io-client";
 
 function App() {
+	if (!process.env.REACT_APP_SERVER) {
+		throw new Error("[APP] The remote server has not been specified.");
+	}
+
 	useEffect(() => {
-		const socket = socketIOClient("http://127.0.0.1:8080", {
-			// transports: ["websocket"],
-		});
+		const socket = socketIOClient(process.env.REACT_APP_SERVER as string);
 		socket.on("main", (data) => {
 			console.log(data);
 		});
@@ -25,7 +27,7 @@ function App() {
 					Edit <code>src/App.tsx</code> and save to reload.
 				</p>
 				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-					Learn React
+					Link here
 				</a>
 			</header>
 		</div>
