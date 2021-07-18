@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import http from "http";
 import { Server, ServerOptions } from "socket.io";
+import dotenv from "dotenv";
 
 const socketSettings: Partial<ServerOptions> = {
 	cors: {
@@ -8,13 +9,20 @@ const socketSettings: Partial<ServerOptions> = {
 	},
 };
 
+if (process.env.NODE_ENV !== "production") {
+	const result = dotenv.config();
+	if (result.error) {
+		throw result.error;
+	}
+}
+
 const port = process.env.PORT || 8080;
 const app: Application = express();
 const server: http.Server = http.createServer(app);
 const io: Server = new Server(server, socketSettings);
 
 io.on("connection", (socket) => {
-	io.emit("main", "A new player has joined the party.");
+	io.emit("main", "Hello from Heroku");
 });
 
 app.get("/", (req: Request, res: Response) => {
