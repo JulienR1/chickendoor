@@ -6,7 +6,8 @@
 	"scripts": {
 		"start": "concurrently \"npm run start:cloudService\" \"npm run start:webApp\"",
 		"start:cloudService": "cd cloudService && npm run dev",
-		"start:webApp": "cd webApp && npm run dev"
+		"start:webApp": "cd webApp && npm run dev",
+		"deploy:cloudService": "git subtree --prefix cloudService origin heroku"
 	},
 	"repository": {
 		"type": "git",
@@ -17,5 +18,8 @@
 	"bugs": {
 		"url": "https://github.com/JulienR1/chickendoor/issues"
 	},
-	"homepage": "https://github.com/JulienR1/chickendoor#readme"
+	"homepage": "https://github.com/JulienR1/chickendoor#readme",
+	"devDependencies": {
+		"concurrently": "^6.2.0"
+	}
 }

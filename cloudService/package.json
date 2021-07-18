@@ -7,11 +7,14 @@
 		"test": "jest",
 		"start": "cd dist && node app.js",
 		"dev": "nodemon ./src/app.ts",
-		"build": "tsc -p .",
+		"build": "npm run lint && tsc -p .",
 		"lint": "npx eslint ./src/**/*.ts"
 	},
 	"author": "",
 	"license": "ISC",
+	"engines": {
+		"node": "14.x"
+	},
 	"dependencies": {
 		"express": "^4.17.1",
 		"socket.io": "^4.1.3"
