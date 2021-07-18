@@ -7,5 +7,7 @@ It also uses the client side of [socket.io](https://www.npmjs.com/package/socket
 ## Commands
 
 `npm run start`: Run and watch the app locally
+
 `npm run build`: Build the app for deployment purposes
+
 `npm run serve`: Locally host the built app on port 3000

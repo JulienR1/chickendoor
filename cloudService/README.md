@@ -7,5 +7,7 @@ It is based on [ExpressJS](https://expressjs.com/) and [Socket.io](https://socke
 ## Commands
 
 `npm run dev`: Starts a watching server for development purposes with nodemon (default port: 8080)
+
 `npm run build`: Validates the code syntax, tests and build the app
+
 `npm run start`: Runs the built app (default port: 8080)
