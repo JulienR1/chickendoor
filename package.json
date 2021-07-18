@@ -7,7 +7,7 @@
 		"start": "concurrently \"npm run start:cloudService\" \"npm run start:webApp\"",
 		"start:cloudService": "cd cloudService && npm run dev",
 		"start:webApp": "cd webApp && npm run dev",
-		"deploy:cloudService": "git subtree --prefix cloudService origin heroku"
+		"deploy:cloudService": "git subtree push --prefix cloudService heroku master"
 	},
 	"repository": {
 		"type": "git",
