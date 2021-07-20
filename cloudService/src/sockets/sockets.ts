@@ -1,13 +1,12 @@
 import http from "http";
 import { Server, ServerOptions, Socket } from "socket.io";
-import { CustomSocket } from "./customSocket";
 import { SocketChannels } from "./socketChannels";
 import { SocketType } from "./socketType";
 
 const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };
 
 let io: Server;
-const allSockets: { [key in SocketType]: CustomSocket[] } = { door: [], client: [] };
+const allSocketIds: { [key in SocketType]: string[] } = { door: [], client: [] };
 
 const initSocket = (server: http.Server) => {
 	io = new Server(server, socketSettings);
@@ -20,18 +19,17 @@ const addNewSocket = (socket: Socket) => {
 };
 
 const addNewSocketWithType = (socket: Socket, type: SocketType) => {
-	const customSocket: CustomSocket = { socketId: socket.id, type };
-	socket.on(SocketChannels.Disconnect, () => onDisconnect(customSocket));
-	allSockets[type].push(customSocket);
+	socket.on(SocketChannels.Disconnect, () => onDisconnect(socket.id, type));
+	allSocketIds[type].push(socket.id);
 	console.log(`A socket of type '${type}' has connected`);
 	// TODO: add events to socket based on type
 };
 
-const onDisconnect = (socket: CustomSocket) => {
-	const index = allSockets[socket.type].indexOf(socket);
+const onDisconnect = (socketId: string, type: SocketType) => {
+	const index = allSocketIds[type].indexOf(socketId);
 	if (index >= 0) {
-		allSockets[socket.type].splice(index, 1);
-		console.log(`A socket of type ${socket.type}' has disconnected`);
+		allSocketIds[type].splice(index, 1);
+		console.log(`A socket of type ${type}' has disconnected`);
 	}
 };
 
