@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Door mock</title>
+
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<main>
+			<h1>Door mock</h1>
+			<div>
+				<button id="connect-btn" onclick="connect()">Connect</button>
+				<button id="disconnect-btn" onclick="disconnect()" disabled>Disconnect</button>
+			</div>
+
+			<div>
+				<button onclick="fetchUpdateTime()">fetch next update time</button>
+				<div>
+					<span id="updateTime">0</span>
+					<span>ms</span>
+				</div>
+			</div>
+		</main>
+
+		<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+		<script src="scripts.js"></script>
+	</body>
+</html>
