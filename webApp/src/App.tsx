@@ -10,9 +10,7 @@ function App() {
 
 	useEffect(() => {
 		const socket = socketIOClient(process.env.REACT_APP_SERVER as string);
-		socket.on("main", (data) => {
-			console.log(data);
-		});
+		socket.emit("clientConnect");
 
 		return () => {
 			socket.disconnect();
