@@ -1,4 +1,4 @@
 export enum SocketType {
-	Door,
-	Client,
+	Door = "door",
+	Client = "client",
 }
