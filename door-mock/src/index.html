@@ -17,8 +17,10 @@
 				<button id="clear-btn" onclick="clearChannels()">Clear</button>
 			</div>
 
+			<title>Connect to the server to emit data</title>
+
 			<div>
-				<button onclick="fetchUpdateTime()">fetch next update time</button>
+				<button onclick="fetchUpdateTime()">fetch next update</button>
 				<p id="updateTime"></p>
 			</div>
 
@@ -42,7 +44,6 @@
 
 				<div>
 					<button type="submit" id="emit-btn" onclick="emitDoorState(event)">emit door state</button>
-					<p>Connect to the server to emit data</p>
 				</div>
 			</form>
 
@@ -50,6 +51,7 @@
 		</main>
 
 		<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+		<script src="channels.js"></script>
 		<script src="scripts.js"></script>
 	</body>
 </html>

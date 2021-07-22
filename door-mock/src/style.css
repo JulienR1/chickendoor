@@ -8,9 +8,18 @@
 }
 
 main {
-	height: 80vh;
+	margin-top: 5vh;
 	text-align: center;
-	margin: 10vh 0;
+}
+
+title {
+	display: block;
+	color: red;
+	font-weight: bold;
+}
+
+body[connected] title {
+	display: none;
 }
 
 div {
@@ -38,19 +47,8 @@ form {
 	opacity: 0.5;
 }
 
-form[connected] {
+body[connected] form {
 	opacity: 1;
-}
-
-form p {
-	color: red;
-	font-weight: bold;
-	text-align: center;
-	visibility: visible;
-}
-
-form[connected] p {
-	visibility: hidden;
 }
 
 select,
@@ -67,6 +65,11 @@ label {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	margin: 0 5%;
+	opacity: 0.5;
+}
+
+body[connected] #channels {
+	opacity: 1;
 }
 
 #channels h4 {

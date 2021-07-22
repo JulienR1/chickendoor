@@ -3,17 +3,15 @@ const server = "http://localhost:8080";
 let socket;
 let isConnected = false;
 
-const eventLogs = [
-	{ channel: "channelOne" },
-	{ channel: "channelTwo" },
-	{ channel: "channelThree" },
-	{ channel: "channelFour" },
-];
+const eventLogs = channels.map((channel) => ({
+	channel,
+}));
 
 connect();
 
 function connect() {
 	socket = io(server);
+	socket.on("disconnect", () => disconnect());
 	socket.emit("doorConnect");
 	isConnected = true;
 	registerSocketEvents();
@@ -38,9 +36,9 @@ function updateConnectionButtons() {
 	document.getElementById("emit-btn").disabled = !isConnected;
 
 	if (isConnected) {
-		document.querySelector("form").setAttribute("connected", "");
+		document.body.setAttribute("connected", "");
 	} else {
-		document.querySelector("form").removeAttribute("connected");
+		document.body.removeAttribute("connected");
 	}
 }
 
