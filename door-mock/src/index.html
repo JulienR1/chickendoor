@@ -18,11 +18,29 @@
 
 			<div>
 				<button onclick="fetchUpdateTime()">fetch next update time</button>
-				<div>
-					<span id="updateTime">0</span>
-					<span>ms</span>
-				</div>
+				<div id="updateTime"></div>
 			</div>
+
+			<div id="channels"></div>
+
+			<form id="doorData">
+				<label for="doorState">Current state: </label>
+				<select name="doorState" id="doorState">
+					<option value="up">UP</option>
+					<option value="down">DOWN</option>
+				</select>
+
+				<label for="nextUpdateDelta">Next update in: </label>
+				<input type="text" id="nextUpdateDelta" name="nextUpdateDelta" placeholder="time in ms" />
+
+				<label for="doorMode">Current mode: </label>
+				<select name="doorMode" id="doorMode">
+					<option value="automatic">AUTOMATIC</option>
+					<option value="manual">MANUAL</option>
+				</select>
+
+				<button type="submit" onclick="emitDoorState(event)">emit door state</button>
+			</form>
 		</main>
 
 		<script src="http://localhost:8080/socket.io/socket.io.js"></script>
