@@ -14,16 +14,17 @@
 			<div>
 				<button id="connect-btn" onclick="connect()">Connect</button>
 				<button id="disconnect-btn" onclick="disconnect()" disabled>Disconnect</button>
+				<button id="clear-btn" onclick="clearChannels()">Clear</button>
 			</div>
 
 			<div>
 				<button onclick="fetchUpdateTime()">fetch next update time</button>
-				<div id="updateTime"></div>
+				<p id="updateTime"></p>
 			</div>
 
-			<div id="channels"></div>
-
 			<form id="doorData">
+				<h3>Manual door state</h3>
+
 				<label for="doorState">Current state: </label>
 				<select name="doorState" id="doorState">
 					<option value="up">UP</option>
@@ -39,8 +40,13 @@
 					<option value="manual">MANUAL</option>
 				</select>
 
-				<button type="submit" onclick="emitDoorState(event)">emit door state</button>
+				<div>
+					<button type="submit" id="emit-btn" onclick="emitDoorState(event)">emit door state</button>
+					<p>Connect to the server to emit data</p>
+				</div>
 			</form>
+
+			<div id="channels"></div>
 		</main>
 
 		<script src="http://localhost:8080/socket.io/socket.io.js"></script>

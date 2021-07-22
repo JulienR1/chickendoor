@@ -3,7 +3,12 @@ const server = "http://localhost:8080";
 let socket;
 let isConnected = false;
 
-const eventLogs = [{ channel: "channelOne" }, { channel: "channelTwo" }];
+const eventLogs = [
+	{ channel: "channelOne" },
+	{ channel: "channelTwo" },
+	{ channel: "channelThree" },
+	{ channel: "channelFour" },
+];
 
 connect();
 
@@ -21,9 +26,22 @@ function disconnect() {
 	updateConnectionButtons();
 }
 
+function clearChannels() {
+	document.querySelectorAll("#channels p").forEach((p) => {
+		p.remove();
+	});
+}
+
 function updateConnectionButtons() {
 	document.getElementById("connect-btn").disabled = isConnected;
 	document.getElementById("disconnect-btn").disabled = !isConnected;
+	document.getElementById("emit-btn").disabled = !isConnected;
+
+	if (isConnected) {
+		document.querySelector("form").setAttribute("connected", "");
+	} else {
+		document.querySelector("form").removeAttribute("connected");
+	}
 }
 
 function fetchUpdateTime() {
@@ -36,15 +54,16 @@ function registerSocketEvents() {
 	eventLogs.forEach((eventLog) => {
 		if (!eventLog.logContainer) {
 			const channelContainer = document.createElement("div");
+			channelContainer.innerHTML = `<h4>${eventLog.channel}</h4>`;
 			channelContainer.id = eventLog.channel;
 			document.getElementById("channels").appendChild(channelContainer);
 			eventLog.logContainer = channelContainer;
 		}
 
-		socket.on(eventLog.channel, () => {
-			const logObj = document.createElement("div");
-			logObj.innerText = `Event received on channel "${eventLog.channel}"`;
-			eventLog.logContainer.appendChild(logObj);
+		socket.on(eventLog.channel, (data) => {
+			const logObj = document.createElement("p");
+			logObj.innerText = `${new Date().toLocaleTimeString("en-GB")}: ${data ? data : "Event received"}`;
+			eventLog.logContainer.insertBefore(logObj, eventLog.logContainer.querySelector("h4").nextSibling);
 		});
 	});
 }

@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Roboto:wght@300&display=swap");
+
+* {
+	font-family: "Roboto", Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+main {
+	height: 80vh;
+	text-align: center;
+	margin: 10vh 0;
+}
+
+div {
+	margin: 20px;
+}
+
+button {
+	display: inline-block;
+	margin: 0 auto;
+	padding: 7px 12px;
+}
+
+p {
+	margin: 8px 0;
+}
+
+form {
+	margin: 0 35vw;
+	padding: 24px 0;
+	width: 30vw;
+	border: 1px solid #000;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	opacity: 0.5;
+}
+
+form[connected] {
+	opacity: 1;
+}
+
+form p {
+	color: red;
+	font-weight: bold;
+	text-align: center;
+	visibility: visible;
+}
+
+form[connected] p {
+	visibility: hidden;
+}
+
+select,
+input {
+	width: 50%;
+	margin: 0 auto;
+}
+
+label {
+	margin-top: 12px;
+}
+
+#channels {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	margin: 0 5%;
+}
+
+#channels h4 {
+	padding: 12px 0;
+}
+
+#channels div {
+	border: 1px solid #000;
+	height: 300px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#channels div p:first-of-type {
+	font-weight: bold;
+	animation: logPop ease 0.25s;
+}
+
+@keyframes logPop {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.05);
+	}
+}
