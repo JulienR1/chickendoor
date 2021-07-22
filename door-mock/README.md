@@ -35,4 +35,4 @@ Sends the specified state data in the form to the server as a JSON string upon r
 
 The mock listens to all specified channels and prints out their content when a message is received. If there is none, it will print out a notification.
 
-To bind the mock to a new channel, its name must be added in [`channels.js`](./channels.js).
+To bind the mock to a new channel, its name must be added in [`channels.js`](./src/channels.js).
