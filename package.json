@@ -21,6 +21,9 @@
 	},
 	"homepage": "https://github.com/JulienR1/chickendoor#readme",
 	"devDependencies": {
-		"concurrently": "^6.2.0"
+		"concurrently": "^6.2.0",
+		"sass": "^1.35.2",
+		"sass-loader": "^12.1.0",
+		"webpack": "^5.46.0"
 	}
 }
