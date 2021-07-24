@@ -17,4 +17,13 @@ module.exports = {
 		"simple-import-sort/imports": "error",
 		"simple-import-sort/exports": "error",
 	},
+	overrides: [
+		{
+			files: ["*.spec.ts"],
+			rules: {
+				"@typescript-eslint/no-empty-function": "off",
+				"@typescript-eslint/no-explicit-any": "off",
+			},
+		},
+	],
 };

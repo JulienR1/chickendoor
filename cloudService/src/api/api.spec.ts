@@ -1,6 +1,7 @@
 import { DaytimeAPIResult } from "@root/models/daytimeData";
 import { DoorPosition } from "@shared/constants/doorPosition";
 import { Response } from "node-fetch";
+
 import { Api } from "./api";
 
 let api: Api;
