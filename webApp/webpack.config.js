@@ -1,6 +1,7 @@
 const prod = process.env.REACT_APP_NODE_ENV === "production";
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
 	mode: prod ? "production" : "development",
@@ -40,4 +41,9 @@ module.exports = {
 			template: "index.html",
 		}),
 	],
+	resolve: {
+		alias: {
+			"@shared": path.resolve(__dirname, "../shared"),
+		},
+	},
 };
