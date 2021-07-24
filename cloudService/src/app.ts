@@ -1,6 +1,8 @@
+import cors from "cors";
+import dotenv from "dotenv";
 import express, { Application } from "express";
 import http from "http";
-import dotenv from "dotenv";
+
 import router from "./routes/routes";
 import { initSocket } from "./sockets/sockets";
 
@@ -15,6 +17,7 @@ const port = process.env.PORT || 8080;
 const app: Application = express();
 const httpServer = http.createServer(app);
 
+app.use(cors());
 app.use(router);
 initSocket(httpServer);
 

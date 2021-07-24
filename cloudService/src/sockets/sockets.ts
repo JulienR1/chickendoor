@@ -1,6 +1,7 @@
+import { SocketChannels } from "@shared/constants/socketChannels";
 import http from "http";
 import { Server, ServerOptions, Socket } from "socket.io";
-import { SocketChannels } from "./socketChannels";
+
 import { SocketType } from "./socketType";
 
 const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };
@@ -8,7 +9,7 @@ const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };
 let io: Server;
 const allSocketIds: { [key in SocketType]: string[] } = { door: [], client: [] };
 
-const initSocket = (server: http.Server) => {
+const initSocket = (server: http.Server): void => {
 	io = new Server(server, socketSettings);
 	io.on(SocketChannels.Connect, addNewSocket);
 };

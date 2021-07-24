@@ -9,10 +9,12 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: "module",
 	},
-	plugins: ["@typescript-eslint"],
+	plugins: ["@typescript-eslint", "simple-import-sort"],
 	rules: {
 		indent: ["error", "tab"],
 		quotes: ["error", "double"],
 		semi: ["error", "always"],
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error",
 	},
 };
