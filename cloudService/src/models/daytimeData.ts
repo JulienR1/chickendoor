@@ -11,6 +11,9 @@ export class DaytimeData {
 	public sunset: number;
 
 	constructor({ sunrise, sunset }: { sunset: string; sunrise: string }) {
+		if (!sunrise || !sunset || sunrise === "" || sunset === "") {
+			throw new Error("[DaytimeData]: The specified values are invalid");
+		}
 		this.sunrise = new Date(sunrise).getTime();
 		this.sunset = new Date(sunset).getTime();
 	}
