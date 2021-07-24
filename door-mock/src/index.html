@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Door mock</title>
+
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<main>
+			<h1>Door mock</h1>
+			<div>
+				<button id="connect-btn" onclick="connect()">Connect</button>
+				<button id="disconnect-btn" onclick="disconnect()" disabled>Disconnect</button>
+				<button id="clear-btn" onclick="clearChannels()">Clear</button>
+			</div>
+
+			<title>Connect to the server to emit data</title>
+
+			<div>
+				<button onclick="fetchUpdateTime()">fetch next update</button>
+				<p id="updateTime"></p>
+			</div>
+
+			<form id="doorData">
+				<h3>Manual door state</h3>
+
+				<label for="doorState">Current state: </label>
+				<select name="doorState" id="doorState">
+					<option value="up">UP</option>
+					<option value="down">DOWN</option>
+				</select>
+
+				<label for="nextUpdateDelta">Next update in: </label>
+				<input type="text" id="nextUpdateDelta" name="nextUpdateDelta" placeholder="time in ms" />
+
+				<label for="doorMode">Current mode: </label>
+				<select name="doorMode" id="doorMode">
+					<option value="automatic">AUTOMATIC</option>
+					<option value="manual">MANUAL</option>
+				</select>
+
+				<div>
+					<button type="submit" id="emit-btn" onclick="emitDoorState(event)">emit door state</button>
+				</div>
+			</form>
+
+			<div id="channels"></div>
+		</main>
+
+		<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+		<script src="channels.js"></script>
+		<script src="scripts.js"></script>
+	</body>
+</html>

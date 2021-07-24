@@ -4,9 +4,10 @@
 	"description": "Automatic door for a backyard chicken coop powered by a car window motor, controlled with a esp32 microcontroller and operated through websockets via a custom website.",
 	"main": "index.js",
 	"scripts": {
-		"start": "concurrently \"npm run start:cloudService\" \"npm run start:webApp\"",
+		"start": "concurrently \"npm run start:cloudService\" \"npm run start:webApp\" \"npm run start:doorMock\"",
 		"start:cloudService": "cd cloudService && npm run dev",
 		"start:webApp": "cd webApp && npm run start",
+		"start:doorMock": "cd door-mock && npm run serve",
 		"deploy:cloudService": "git subtree push --prefix cloudService heroku master"
 	},
 	"repository": {
@@ -20,6 +21,9 @@
 	},
 	"homepage": "https://github.com/JulienR1/chickendoor#readme",
 	"devDependencies": {
-		"concurrently": "^6.2.0"
+		"concurrently": "^6.2.0",
+		"sass": "^1.35.2",
+		"sass-loader": "^12.1.0",
+		"webpack": "^5.46.0"
 	}
 }
