@@ -14,6 +14,9 @@ module.exports = {
 		indent: ["error", "tab"],
 		quotes: ["error", "double"],
 		semi: ["error", "always"],
+		"no-await-in-loop": "error",
+		"no-constructor-return": "error",
+		"no-empty-function": "error",
 		"simple-import-sort/imports": "error",
 		"simple-import-sort/exports": "error",
 	},
@@ -21,6 +24,7 @@ module.exports = {
 		{
 			files: ["*.spec.ts"],
 			rules: {
+				"no-empty-function": "off",
 				"@typescript-eslint/no-empty-function": "off",
 				"@typescript-eslint/no-explicit-any": "off",
 			},

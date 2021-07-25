@@ -1,1 +1,1 @@
-const channels = ["channelOne", "channelTwo", "channelThree", "channelFour"];
+const channels = ["requestDoorState"];

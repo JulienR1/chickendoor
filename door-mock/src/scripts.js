@@ -85,5 +85,5 @@ function emitDoorState(event) {
 		}
 	});
 
-	socket.emit("currentState", JSON.stringify(formData));
+	socket.emit("requestDoorState", JSON.stringify(formData));
 }

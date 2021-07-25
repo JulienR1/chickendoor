@@ -2,6 +2,8 @@ import { SocketChannels } from "@shared/constants/socketChannels";
 import http from "http";
 import { Server, ServerOptions, Socket } from "socket.io";
 
+import { onConnect as onClientConnect } from "./clientSocket";
+import { onConnect as onDoorConnect } from "./doorSocket";
 import { SocketType } from "./socketType";
 
 const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };
@@ -23,7 +25,12 @@ const addNewSocketWithType = (socket: Socket, type: SocketType) => {
 	socket.on(SocketChannels.Disconnect, () => onDisconnect(socket.id, type));
 	allSocketIds[type].push(socket.id);
 	console.log(`A socket of type '${type}' has connected`);
-	// TODO: add events to socket based on type
+
+	if (type === SocketType.Door) {
+		onDoorConnect(socket);
+	} else if (type === SocketType.Client) {
+		onClientConnect(socket);
+	}
 };
 
 const onDisconnect = (socketId: string, type: SocketType) => {

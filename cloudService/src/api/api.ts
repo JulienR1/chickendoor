@@ -35,19 +35,19 @@ export class Api {
 		const now = this.now();
 		if (now < sunrise) {
 			return {
-				targetPosition: DoorPosition.UP,
+				targetPosition: DoorPosition.Up,
 				delayToMoveInMs: sunrise - now,
 			};
 		} else if (now < sunset) {
 			return {
-				targetPosition: DoorPosition.DOWN,
+				targetPosition: DoorPosition.Down,
 				delayToMoveInMs: sunset - now,
 			};
 		} else {
 			const midnight = new Date(now);
 			midnight.setHours(24, 0, 0);
 			return {
-				targetPosition: DoorPosition.UP,
+				targetPosition: DoorPosition.Up,
 				delayToMoveInMs: midnight.getTime() - now,
 			};
 		}

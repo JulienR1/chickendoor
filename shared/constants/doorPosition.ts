@@ -1,6 +1,7 @@
 export enum DoorPosition {
-	UP = "up",
-	MOVING_UP = "moving_up",
-	MOVING_DOWN = "moving_down",
-	DOWN = "down",
+	Up = "up",
+	MovingUp = "moving_up",
+	MovingDown = "moving_down",
+	Down = "down",
+	Unknown = "unknown",
 }

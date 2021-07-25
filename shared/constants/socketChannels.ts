@@ -4,4 +4,7 @@ export enum SocketChannels {
 
 	DoorConnect = "doorConnect",
 	ClientConnect = "clientConnect",
+
+	RequestDoorState = "requestDoorState",
+	NotifyDoorState = "notifyDoorState",
 }

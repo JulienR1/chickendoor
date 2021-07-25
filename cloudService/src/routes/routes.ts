@@ -1,4 +1,4 @@
-import api from "@root/api/api";
+import { Api } from "@root/api/api";
 import express, { Request, Response } from "express";
 
 const router = express.Router();
@@ -8,6 +8,7 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.get("/api/nextMove", async (req: Request, res: Response) => {
+	const api = new Api();
 	const nextMove = await api.nextMove();
 	res.status(200).send(nextMove);
 });
