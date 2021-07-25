@@ -1,4 +1,4 @@
-export enum SocketChannels {
+export enum SocketChannel {
 	Connect = "connection",
 	Disconnect = "disconnect",
 
