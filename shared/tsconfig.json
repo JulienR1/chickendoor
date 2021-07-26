@@ -3,7 +3,8 @@
 		"declaration": true,
 		"declarationMap": true,
 		"rootDir": ".",
-		"composite": true
+		"composite": true,
+		"outDir": "./dist"
 	},
 	"references": []
 }

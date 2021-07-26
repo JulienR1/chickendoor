@@ -1,6 +1,7 @@
 import { SocketChannel } from "@shared/constants/socketChannel";
-import { sanitize, isValid, DoorData } from "@shared/models/doorData";
+import { DoorData,isValid, sanitize } from "@shared/models/doorData";
 import { Socket } from "socket.io";
+
 import { sendToClientSockets } from "./sockets";
 
 export const onConnect = (socket: Socket): void => {

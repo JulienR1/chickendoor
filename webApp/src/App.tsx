@@ -1,8 +1,8 @@
+import { SocketChannel } from "@shared/constants/socketChannel";
 import React, { useEffect } from "react";
 import { io } from "socket.io-client";
-import { SocketChannel } from "@shared/constants/socketChannel";
 
-function App() {
+function App(): JSX.Element {
 	useEffect(() => {
 		console.log("use effect");
 

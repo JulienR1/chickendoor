@@ -128,7 +128,7 @@ describe("calculateNextMove", () => {
 		now.setHours(5, 0, 0);
 		mockNow.mockReturnValue(now);
 
-		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.UP);
+		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.Up);
 	});
 
 	it("API-8 - Should request UP after sunset", async () => {
@@ -136,7 +136,7 @@ describe("calculateNextMove", () => {
 		now.setHours(20, 0, 0);
 		mockNow.mockReturnValue(now);
 
-		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.UP);
+		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.Up);
 	});
 
 	it("API-9 - Should request DOWN after sunrise and before sunset", async () => {
@@ -144,7 +144,7 @@ describe("calculateNextMove", () => {
 		now.setHours(12, 0, 0);
 		mockNow.mockReturnValue(now);
 
-		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.DOWN);
+		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.Down);
 	});
 
 	it("API-10 - Should correctly request update delays", async () => {
