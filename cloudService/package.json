@@ -8,7 +8,7 @@
 		"test:watch": "npm run test -- --watch",
 		"start": "cd dist && node app.js",
 		"dev": "nodemon",
-		"build": "npm i && npm run lint && npm run test && npm run build:shared && webpack && npm prune --production",
+		"build": "npm i && npm run test && npm run build:shared && webpack && npm prune --production",
 		"build:shared": "tsc -b ./../shared",
 		"lint": "npx eslint ./src/**/*.ts",
 		"lint:fix": "npm run lint -- --fix"
