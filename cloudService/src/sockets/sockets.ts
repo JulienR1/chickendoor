@@ -1,6 +1,9 @@
+import { SocketChannel } from "@shared/constants/socketChannel";
 import http from "http";
 import { Server, ServerOptions, Socket } from "socket.io";
-import { SocketChannels } from "./socketChannels";
+
+import { onConnect as onClientConnect } from "./clientSocket";
+import { onConnect as onDoorConnect } from "./doorSocket";
 import { SocketType } from "./socketType";
 
 const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };
@@ -8,21 +11,26 @@ const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };
 let io: Server;
 const allSocketIds: { [key in SocketType]: string[] } = { door: [], client: [] };
 
-const initSocket = (server: http.Server) => {
+const initSocket = (server: http.Server): void => {
 	io = new Server(server, socketSettings);
-	io.on(SocketChannels.Connect, addNewSocket);
+	io.on(SocketChannel.Connect, addNewSocket);
 };
 
 const addNewSocket = (socket: Socket) => {
-	socket.on(SocketChannels.ClientConnect, () => addNewSocketWithType(socket, SocketType.Client));
-	socket.on(SocketChannels.DoorConnect, () => addNewSocketWithType(socket, SocketType.Door));
+	socket.on(SocketChannel.ClientConnect, () => addNewSocketWithType(socket, SocketType.Client));
+	socket.on(SocketChannel.DoorConnect, () => addNewSocketWithType(socket, SocketType.Door));
 };
 
 const addNewSocketWithType = (socket: Socket, type: SocketType) => {
-	socket.on(SocketChannels.Disconnect, () => onDisconnect(socket.id, type));
+	socket.on(SocketChannel.Disconnect, () => onDisconnect(socket.id, type));
 	allSocketIds[type].push(socket.id);
 	console.log(`A socket of type '${type}' has connected`);
-	// TODO: add events to socket based on type
+
+	if (type === SocketType.Door) {
+		onDoorConnect(socket);
+	} else if (type === SocketType.Client) {
+		onClientConnect(socket);
+	}
 };
 
 const onDisconnect = (socketId: string, type: SocketType) => {
@@ -33,4 +41,18 @@ const onDisconnect = (socketId: string, type: SocketType) => {
 	}
 };
 
-export { initSocket };
+const sendToDoorSockets = (dataToSend: string, channel: SocketChannel): void => {
+	sendToSocketList(allSocketIds.door, dataToSend, channel);
+};
+
+const sendToClientSockets = (dataToSend: string, channel: SocketChannel): void => {
+	sendToSocketList(allSocketIds.client, dataToSend, channel);
+};
+
+const sendToSocketList = (socketIdList: string[], dataToSend: string, channel: SocketChannel): void => {
+	socketIdList.forEach((socketId) => {
+		io.to(socketId).emit(channel, dataToSend);
+	});
+};
+
+export { initSocket, sendToClientSockets, sendToDoorSockets };

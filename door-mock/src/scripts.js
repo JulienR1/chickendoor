@@ -43,8 +43,14 @@ function updateConnectionButtons() {
 }
 
 function fetchUpdateTime() {
-	fetch(`${server}/api/nextMove`, { mode: "no-cors" }).then((returnData) => {
-		document.getElementById("updateTime").innerText = returnData.ok ? returnData.body : "failed";
+	fetch(`${server}/api/nextMove`).then((returnData) => {
+		if (returnData.ok) {
+			returnData.text().then((body) => {
+				document.getElementById("updateTime").innerText = body;
+			});
+		} else {
+			document.getElementById("updateTime").innerText = "failed";
+		}
 	});
 }
 
@@ -79,5 +85,5 @@ function emitDoorState(event) {
 		}
 	});
 
-	socket.emit("currentState", JSON.stringify(formData));
+	socket.emit("requestDoorState", JSON.stringify(formData));
 }

@@ -7,7 +7,17 @@
 		"lib": ["dom", "esnext"],
 		"strict": true,
 		"sourceMap": true,
-		"target": "esnext"
+		"target": "esnext",
+		"baseUrl": ".",
+		"paths": {
+			"@root/*": ["src/*"],
+			"@shared/*": ["../shared/*"]
+		}
 	},
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules"],
+	"references": [
+		{
+			"path": "../shared"
+		}
+	]
 }

@@ -8,7 +8,9 @@
 		"start:cloudService": "cd cloudService && npm run dev",
 		"start:webApp": "cd webApp && npm run start",
 		"start:doorMock": "cd door-mock && npm run serve",
-		"deploy:cloudService": "git subtree push --prefix cloudService heroku master"
+		"deploy:cloudService": "deploy.sh",
+		"heroku:start": "cd cloudService && npm run start",
+		"heroku:build": "cd cloudService && npm run build"
 	},
 	"repository": {
 		"type": "git",
