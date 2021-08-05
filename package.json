@@ -10,7 +10,7 @@
 		"start:doorMock": "cd door-mock && npm run serve",
 		"deploy:cloudService": "deploy.sh",
 		"heroku:start": "cd cloudService && npm run start",
-		"heroku:build": "cd cloudService && npm run build"
+		"build": "cd cloudService && npm run build"
 	},
 	"repository": {
 		"type": "git",
