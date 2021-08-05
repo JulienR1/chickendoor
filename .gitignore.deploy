@@ -1,0 +1,4 @@
+**/door-mock
+**/webapp
+*.sh
+.gitignore.deploy
