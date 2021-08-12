@@ -29,5 +29,8 @@
 		"sass": "^1.35.2",
 		"sass-loader": "^12.1.0",
 		"webpack": "^5.46.0"
+	},
+	"dependencies": {
+		"classnames": "^2.3.1"
 	}
 }

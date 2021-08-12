@@ -1,0 +1,45 @@
+@import "../../style/general.scss";
+
+.iconGroup {
+	--groupHeight: 110px;
+	@extend .container;
+
+	height: calc(var(--groupHeight) / 2);
+	padding: calc(var(--groupHeight) / 4) 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.icon {
+	--iconSize: calc(var(--groupHeight) / 2);
+
+	display: block;
+	position: relative;
+	height: var(--iconSize);
+	width: var(--iconSize);
+	background-color: var(--purple);
+	border-radius: 50%;
+}
+
+.icon .material-icons {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	line-height: var(--iconSize);
+	font-size: 36px;
+	color: var(--white);
+	transform: translate(-50%, -50%);
+}
+
+.icon--dual .material-icons {
+	--dualIconOffset: 15%;
+
+	&:first-of-type {
+		top: calc(50% - var(--dualIconOffset));
+	}
+
+	&:last-of-type {
+		top: calc(50% + var(--dualIconOffset));
+	}
+}
