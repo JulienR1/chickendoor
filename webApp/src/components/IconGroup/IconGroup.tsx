@@ -1,10 +1,8 @@
 import "./IconGroup.scss";
 
-import "./IconGroup";
-
 import { DualIcon, IIcon } from "@root/models/IIcon";
-import React from "react";
 import classNames from "classnames";
+import React from "react";
 
 interface IProps {
 	icons: (IIcon | DualIcon)[];

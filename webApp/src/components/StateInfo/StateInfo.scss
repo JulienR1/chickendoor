@@ -1,0 +1,10 @@
+.stateInfo {
+	--groupWidth: 450px;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: 70%;
+	margin: 0 auto;
+	min-width: calc(var(--groupWidth) * 20 / 9);
+	gap: calc(var(--groupWidth) * 2 / 9);
+}

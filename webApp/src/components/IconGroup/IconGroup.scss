@@ -7,7 +7,7 @@
 	height: calc(var(--groupHeight) / 2);
 	padding: calc(var(--groupHeight) / 4) 0;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
 }
 
