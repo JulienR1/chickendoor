@@ -1,0 +1,10 @@
+@import "./reset.scss";
+@import "./fonts.scss";
+
+html,
+body,
+#app {
+	display: block;
+	min-height: 100vh;
+	background-color: var(--lightgrey);
+}
