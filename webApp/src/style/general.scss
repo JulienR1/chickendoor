@@ -1,7 +1,11 @@
 @import "./colors.scss";
 
+:root {
+	--defaultBorderRadius: 20px;
+}
+
 .container {
 	background-color: var(--white);
 	box-shadow: 0 6px 6px var(--shadowBlack);
-	border-radius: 20px;
+	border-radius: var(--defaultBorderRadius);
 }

@@ -1,0 +1,15 @@
+@import "../../style/general.scss";
+
+.controlPanel {
+	@extend .container;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	width: 55vw;
+	margin: 0 auto;
+	padding: 40px;
+}
+
+.controlPanel__timeline {
+	grid-column: 1 / 3;
+}

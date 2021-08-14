@@ -11,4 +11,5 @@ export enum IconName {
 	ArrowUp = "arrow_drop_up",
 	Sun = "brightness_high",
 	Moon = "dark_mode",
+	Watch = "watch",
 }

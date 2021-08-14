@@ -1,0 +1,72 @@
+$timestampHeight: 24px;
+$timelinePadding: 8px;
+$timelineIconWidth: 70px;
+$timestampContainerPadding: 10px;
+
+.timeline {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: $timestampHeight;
+
+	padding: $timelinePadding 0;
+	background-color: var(--lightergrey);
+	border-radius: var(--defaultBorderRadius);
+	border: 1px solid var(--borderBlack);
+
+	::-webkit-scrollbar {
+		height: 6px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background-color: var(--shadowBlack);
+	}
+}
+
+.timeline__icon {
+	position: absolute;
+	display: block;
+	height: inherit;
+	width: $timelineIconWidth;
+	top: 0;
+
+	padding: $timelinePadding 0;
+	background-color: var(--purple);
+	border-radius: var(--defaultBorderRadius);
+	border: 1px solid var(--purple);
+	transform: translate(-1px, -1px);
+
+	text-align: center;
+	color: var(--white);
+}
+
+.timeline__timestamps {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: calc(100% - #{$timelineIconWidth} - 2 * #{$timestampContainerPadding});
+	line-height: $timestampHeight;
+
+	margin-left: $timelineIconWidth;
+
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.timeline__timestamps__scroller {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-shrink: 0;
+	top: 0;
+	left: 0;
+	padding: $timelinePadding $timestampContainerPadding;
+}
+
+.timeline__timestamps__scroller__child {
+	display: inline-block;
+	line-height: inherit;
+	flex-shrink: 0;
+	height: 100%;
+	user-select: none;
+}

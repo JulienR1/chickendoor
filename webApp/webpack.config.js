@@ -14,8 +14,6 @@ module.exports = () => {
 		return prev;
 	}, {});
 
-	console.log(envKeys);
-
 	return {
 		mode: prod ? "production" : "development",
 		entry: "./src/index.tsx",

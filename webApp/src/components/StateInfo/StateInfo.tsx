@@ -3,9 +3,9 @@ import "./StateInfo.scss";
 import { DualIcon, IconName, IIcon } from "@root/models/IIcon";
 import React from "react";
 
-import IconGroup from "../IconGroup";
+import IconGroup from "../Icons";
 
-function StateInfo() {
+function StateInfo(): JSX.Element {
 	const doorStateIcons: (IIcon | DualIcon)[] = [
 		{ name: IconName.DoorClosed },
 		[{ name: IconName.ArrowUp }, { name: IconName.ArrowDown }],
