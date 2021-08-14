@@ -58,8 +58,7 @@ $timestampContainerPadding: 10px;
 	display: flex;
 	flex-wrap: nowrap;
 	flex-shrink: 0;
-	top: 0;
-	left: 0;
+	height: $timestampHeight;
 	padding: $timelinePadding $timestampContainerPadding;
 }
 
@@ -69,4 +68,28 @@ $timestampContainerPadding: 10px;
 	flex-shrink: 0;
 	height: 100%;
 	user-select: none;
+}
+
+.timeline__timestamp__extra {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.timeline__timestamp__extra__completed {
+	line-height: inherit;
+	color: var(--green);
+	font-size: 20px;
+}
+
+.timeline__timestamp__extra__manual {
+	color: var(--purple);
+}
+
+.timeline__timestamp__extra__manual--minified {
+	position: absolute;
+	font-size: 66%;
+	top: 22.5%;
+	left: 47.5%;
 }

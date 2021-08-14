@@ -14,6 +14,25 @@ interface IProps {
 }
 
 function Timeline({ timestamps, classname }: IProps): JSX.Element {
+	const manualContent = "m";
+
+	const renderExtra = ({ completed, manual }: ITimeStamp) => {
+		return (
+			<div className="timeline__timestamp__extra">
+				{completed && <MaterialIcon iconName={IconName.Checkmark} classname="timeline__timestamp__extra__completed" />}
+				{manual && (
+					<span
+						className={classNames("timeline__timestamp__extra__manual", {
+							"timeline__timestamp__extra__manual--minified": completed,
+						})}
+					>
+						{manualContent}
+					</span>
+				)}
+			</div>
+		);
+	};
+
 	return (
 		<div className={classNames("timeline", classname)}>
 			<div className="timeline__icon">
@@ -22,7 +41,12 @@ function Timeline({ timestamps, classname }: IProps): JSX.Element {
 			<div className="timeline__timestamps">
 				<div className="timeline__timestamps__scroller">
 					{timestamps.map((timestamp, index) => (
-						<Timestamp data={timestamp} classname={"timeline__timestamps__scroller__child"} key={index.toString()} />
+						<Timestamp
+							data={timestamp}
+							extra={renderExtra(timestamp)}
+							classname={"timeline__timestamps__scroller__child"}
+							key={index.toString()}
+						/>
 					))}
 				</div>
 			</div>

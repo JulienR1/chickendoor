@@ -12,4 +12,6 @@ export enum IconName {
 	Sun = "brightness_high",
 	Moon = "dark_mode",
 	Watch = "watch",
+	Refresh = "sync",
+	Checkmark = "check",
 }

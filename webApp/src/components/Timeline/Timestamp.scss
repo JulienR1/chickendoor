@@ -1,0 +1,53 @@
+$timestampSpacing: 5px;
+$iconWidth: 40px;
+
+.timestamp {
+	display: flex;
+	position: relative;
+	background-color: var(--white);
+	border-radius: var(--defaultBorderRadius);
+	border: 1px solid var(--borderBlack);
+	margin: 0 $timestampSpacing;
+	font-size: 12px;
+}
+
+.timestamp__icon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: $iconWidth;
+	height: inherit;
+	text-align: center;
+
+	background-color: var(--purple);
+	color: var(--white);
+	border-radius: var(--defaultBorderRadius);
+	border: 1px solid var(--purple);
+	transform: translate(-1px, -1px);
+
+	.material-icons {
+		font-size: 21px;
+		line-height: inherit;
+	}
+}
+
+.timestamp__time {
+	margin-left: $iconWidth;
+	padding: 0 8px;
+}
+
+.timestamp__extra {
+	position: relative;
+	width: calc(#{$iconWidth} * 0.667);
+	overflow: hidden;
+}
+
+.timestamp__extra__content {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

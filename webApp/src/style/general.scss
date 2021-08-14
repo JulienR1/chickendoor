@@ -4,6 +4,10 @@
 	--defaultBorderRadius: 20px;
 }
 
+.material-icons {
+	user-select: none;
+}
+
 .container {
 	background-color: var(--white);
 	box-shadow: 0 6px 6px var(--shadowBlack);
