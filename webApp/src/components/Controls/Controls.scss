@@ -22,7 +22,10 @@
 }
 
 .controls__command:hover,
-.controls__command:active {
+.controls__command:active,
+.controls__command:focus {
+	@extend .font--semibold;
+	border: 1px solid var(--darkBorderBlack);
 }
 
 .controls__command--disabled {
