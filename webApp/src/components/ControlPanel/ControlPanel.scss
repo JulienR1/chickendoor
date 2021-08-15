@@ -4,10 +4,16 @@
 	@extend .container;
 
 	display: grid;
+	position: relative;
 	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto 1fr;
+	height: 35vh;
 	width: 55vw;
+
+	align-self: start;
 	margin: 0 auto;
 	padding: 40px;
+	gap: 15px;
 }
 
 .controlPanel__timeline {

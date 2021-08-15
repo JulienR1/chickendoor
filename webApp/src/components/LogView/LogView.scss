@@ -1,0 +1,68 @@
+@import "../../style/general.scss";
+@import "../../style/fonts.scss";
+
+$logHeight: 24px;
+$contentFontSize: 11px;
+
+.logView {
+	@extend .subcontainer;
+	position: relative;
+
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background-color: var(--shadowBlack);
+	}
+}
+
+.logView__empty {
+	@extend .font--medium;
+
+	display: flex;
+	height: 50%;
+	justify-content: center;
+	align-items: center;
+	color: var(--purple);
+	font-size: 15px;
+}
+
+.logView__scroller {
+	position: absolute;
+	height: 100%;
+	margin: 0 7px 0 10px;
+	padding-right: 3px;
+	overflow-y: auto;
+}
+
+.logView__log {
+	@extend .subcontainer;
+
+	display: grid;
+	height: $logHeight;
+	line-height: $logHeight;
+	grid-template-columns: 60px auto;
+	background-color: var(--white);
+	color: var(--purple);
+	margin: 6px 0;
+}
+
+.log__time {
+	@extend .font--medium;
+	@extend .purpleHandle;
+
+	display: flex;
+	align-self: center;
+	justify-content: center;
+	font-size: $contentFontSize;
+}
+
+.log__msg {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: $contentFontSize;
+	padding: 0 6px;
+}

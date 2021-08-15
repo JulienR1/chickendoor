@@ -1,3 +1,6 @@
+@import "../../style/fonts.scss";
+@import "../../style/general.scss";
+
 $timestampSpacing: 5px;
 $iconWidth: 40px;
 
@@ -12,18 +15,14 @@ $iconWidth: 40px;
 }
 
 .timestamp__icon {
+	@extend .purpleHandle;
+
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: $iconWidth;
 	height: inherit;
 	text-align: center;
-
-	background-color: var(--purple);
-	color: var(--white);
-	border-radius: var(--defaultBorderRadius);
-	border: 1px solid var(--purple);
-	transform: translate(-1px, -1px);
 
 	.material-icons {
 		font-size: 21px;
@@ -32,8 +31,11 @@ $iconWidth: 40px;
 }
 
 .timestamp__time {
+	@extend .font--medium;
+
 	margin-left: $iconWidth;
 	padding: 0 8px;
+	color: var(--purple);
 }
 
 .timestamp__extra {

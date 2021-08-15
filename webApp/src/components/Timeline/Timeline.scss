@@ -1,18 +1,18 @@
+@import "../../style/general.scss";
+
 $timestampHeight: 24px;
 $timelinePadding: 8px;
 $timelineIconWidth: 70px;
 $timestampContainerPadding: 10px;
 
 .timeline {
+	@extend .subcontainer;
+
 	display: block;
 	position: relative;
 	width: 100%;
 	height: $timestampHeight;
-
 	padding: $timelinePadding 0;
-	background-color: var(--lightergrey);
-	border-radius: var(--defaultBorderRadius);
-	border: 1px solid var(--borderBlack);
 
 	::-webkit-scrollbar {
 		height: 6px;
@@ -25,6 +25,8 @@ $timestampContainerPadding: 10px;
 }
 
 .timeline__icon {
+	@extend .purpleHandle;
+
 	position: absolute;
 	display: block;
 	height: inherit;
@@ -32,13 +34,7 @@ $timestampContainerPadding: 10px;
 	top: 0;
 
 	padding: $timelinePadding 0;
-	background-color: var(--purple);
-	border-radius: var(--defaultBorderRadius);
-	border: 1px solid var(--purple);
-	transform: translate(-1px, -1px);
-
 	text-align: center;
-	color: var(--white);
 }
 
 .timeline__timestamps {

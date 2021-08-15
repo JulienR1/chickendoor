@@ -1,7 +1,9 @@
 import "./ControlPanel.scss";
 
+import LogView from "@root/components/LogView";
 import { Timeline } from "@root/components/Timeline";
 import { IconName } from "@root/models/IIcon";
+import { ILog } from "@root/models/ILog";
 import { ITimeStamp } from "@root/models/ITimeStamp";
 import React from "react";
 
@@ -14,11 +16,20 @@ function ControlPanel(): JSX.Element {
 		{ time: new Date(), icon: { name: IconName.DoorClosed }, completed: false, manual: false },
 	];
 
+	const logs: ILog[] = [
+		// { time: new Date(), log: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, natus." },
+		// { time: new Date(), log: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, natus." },
+		// { time: new Date(), log: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, natus." },
+		// { time: new Date(), log: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, natus." },
+		// { time: new Date(), log: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, natus." },
+		// { time: new Date(), log: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, natus." },
+	];
+
 	return (
 		<div className="controlPanel">
 			<Timeline timestamps={timestamps} classname="controlPanel__timeline" />
 			<div className="controlPanel__controls">controls</div>
-			<div className="controlPanel__logs">logs</div>
+			<LogView classnames="controlPanel__logs" logs={logs} />
 		</div>
 	);
 }

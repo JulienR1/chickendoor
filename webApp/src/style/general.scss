@@ -13,3 +13,17 @@
 	box-shadow: 0 6px 6px var(--shadowBlack);
 	border-radius: var(--defaultBorderRadius);
 }
+
+.subcontainer {
+	background-color: var(--lightergrey);
+	border-radius: var(--defaultBorderRadius);
+	border: 1px solid var(--borderBlack);
+}
+
+.purpleHandle {
+	border-radius: var(--defaultBorderRadius);
+	background-color: var(--purple);
+	color: var(--white);
+	border: 1px solid var(--purple);
+	transform: translate(-1px, -1px);
+}
