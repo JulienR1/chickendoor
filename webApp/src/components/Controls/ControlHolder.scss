@@ -1,0 +1,39 @@
+@import "../../style/general.scss";
+
+$controlHeight: 40px;
+$iconWidth: 70px;
+
+.controlHolder {
+	@extend .subcontainer;
+
+	display: flex;
+	width: 100%;
+	height: $controlHeight;
+	line-height: $controlHeight;
+}
+
+.controlHolder__icon {
+	@extend .purpleHandle;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: inherit;
+	width: 70px;
+
+	.material-icons {
+		font-size: 30px;
+	}
+}
+
+.controlHolder__content {
+	display: flex;
+	width: calc(90% - #{$iconWidth});
+	padding: calc(#{$controlHeight} * 0.2) 5%;
+	gap: 15px;
+}
+
+.controlHolder__content__interactable {
+	position: relative;
+	flex: 1;
+}

@@ -27,8 +27,4 @@ function LogView({ logs, classnames }: IProps): JSX.Element {
 	);
 }
 
-LogView.defaultProps = {
-	classnames: "",
-};
-
 export default LogView;

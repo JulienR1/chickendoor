@@ -7,6 +7,8 @@ import { ILog } from "@root/models/ILog";
 import { ITimeStamp } from "@root/models/ITimeStamp";
 import React from "react";
 
+import { Controls } from "../Controls";
+
 function ControlPanel(): JSX.Element {
 	const timestamps: ITimeStamp[] = [
 		{ time: new Date(), icon: { name: IconName.Refresh }, completed: true, manual: false },
@@ -27,8 +29,8 @@ function ControlPanel(): JSX.Element {
 
 	return (
 		<div className="controlPanel">
-			<Timeline timestamps={timestamps} classname="controlPanel__timeline" />
-			<div className="controlPanel__controls">controls</div>
+			<Timeline timestamps={timestamps} className="controlPanel__timeline" />
+			<Controls className="controlPanel__controls" />
 			<LogView classnames="controlPanel__logs" logs={logs} />
 		</div>
 	);

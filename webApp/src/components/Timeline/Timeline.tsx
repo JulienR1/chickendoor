@@ -10,10 +10,10 @@ import Timestamp from "./Timestamp";
 
 interface IProps {
 	timestamps: ITimeStamp[];
-	classname?: string;
+	className?: string;
 }
 
-function Timeline({ timestamps, classname }: IProps): JSX.Element {
+function Timeline({ timestamps, className }: IProps): JSX.Element {
 	const manualContent = "m";
 
 	const renderExtra = ({ completed, manual }: ITimeStamp) => {
@@ -34,7 +34,7 @@ function Timeline({ timestamps, classname }: IProps): JSX.Element {
 	};
 
 	return (
-		<div className={classNames("timeline", classname)}>
+		<div className={classNames("timeline", className)}>
 			<div className="timeline__icon">
 				<MaterialIcon iconName={IconName.Watch} />
 			</div>

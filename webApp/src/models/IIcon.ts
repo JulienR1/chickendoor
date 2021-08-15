@@ -14,4 +14,7 @@ export enum IconName {
 	Watch = "watch",
 	Refresh = "sync",
 	Checkmark = "check",
+	Add = "add",
+	Power = "power_settings_new",
+	Settings = "settings",
 }

@@ -1,0 +1,31 @@
+@import "../../style/general.scss";
+@import "../../style/fonts.scss";
+
+.controls {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.controls__command {
+	@extend .subcontainer;
+	@extend .font--medium;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	background-color: var(--white);
+	color: var(--purple);
+}
+
+.controls__command:hover,
+.controls__command:active {
+}
+
+.controls__command--disabled {
+	opacity: 0.5;
+	cursor: default;
+}
