@@ -31,7 +31,7 @@ function Controls({ className }: IProps): JSX.Element {
 		<div className={classNames("controls", className)}>
 			<ControlHolder icon={{ name: IconName.Add }}>
 				{renderButton({ label: "Ouvrir", onClick: () => console.log("open") })}
-				{renderButton({ label: "Fermer", onClick: () => console.log("close") })}
+				{renderButton({ label: "Fermer", onClick: () => console.log("close"), disabled: true })}
 			</ControlHolder>
 
 			<ControlHolder icon={{ name: IconName.Power }}>
@@ -40,7 +40,7 @@ function Controls({ className }: IProps): JSX.Element {
 
 			<ControlHolder icon={{ name: IconName.Settings }}>
 				{renderButton({ label: "Consulter", onClick: () => console.log("read") })}
-				{renderButton({ label: "Modifier", onClick: () => console.log("modify") })}
+				{renderButton({ label: "Modifier", onClick: () => console.log("modify"), disabled: true })}
 			</ControlHolder>
 		</div>
 	);

@@ -8,6 +8,13 @@
 	min-height: 100vh;
 }
 
+.dashboard--waiting {
+	@extend .font--semibold;
+
+	color: var(--purple);
+	justify-content: center;
+}
+
 .dashboard__title {
 	@extend .container;
 	@extend .font--semibold;
