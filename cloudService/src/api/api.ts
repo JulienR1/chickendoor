@@ -1,55 +1,34 @@
 import { DaytimeAPIResult, DaytimeData } from "@root/models/daytimeData";
 import { NextMove } from "@root/models/nextmove";
-import { DoorPosition } from "@shared/constants/doorPosition";
+import { LightData } from "@shared/models/lightData";
 import fetch, { Response } from "node-fetch";
+
+import { calculateDaylight, calculateNextMove } from "./service";
 
 export class Api {
 	private readonly DAYTIME_ENDPOINT = "https://api.sunrise-sunset.org/json?lat=46.37268&lng=-72.7358733&formatted=0";
 
-	private now() {
-		return Date.now();
-	}
-
 	public nextMove = async (): Promise<NextMove | undefined> => {
+		const daytimeData = await this.getDaytimeData();
+		return daytimeData ? calculateNextMove(daytimeData) : undefined;
+	};
+
+	public daylight = async (): Promise<LightData | undefined> => {
+		const daytimeData = await this.getDaytimeData();
+		return daytimeData ? calculateDaylight(daytimeData) : undefined;
+	};
+
+	private getDaytimeData = async (): Promise<DaytimeData | undefined> => {
 		const responseJson: DaytimeAPIResult | undefined = await this.fetchDaytimeAPIResults();
-		if (responseJson?.status === "OK") {
-			const daytimeData = new DaytimeData(responseJson.results);
-			return this.calculateNextMove(daytimeData);
-		}
-		return undefined;
+		return responseJson?.status === "OK" ? new DaytimeData(responseJson.results) : undefined;
 	};
 
 	private async fetchDaytimeAPIResults(): Promise<DaytimeAPIResult | undefined> {
-		const response: Response = await this.fetchApi();
-		if (response.ok) {
-			return response.json();
-		}
-		return undefined;
+		const response: Response = await this.fetchDaytimeApi();
+		return response.ok ? response.json() : undefined;
 	}
 
-	private fetchApi(): Promise<Response> {
+	private fetchDaytimeApi(): Promise<Response> {
 		return fetch(this.DAYTIME_ENDPOINT);
-	}
-
-	private calculateNextMove({ sunrise, sunset }: DaytimeData): NextMove {
-		const now = this.now();
-		if (now < sunrise) {
-			return {
-				targetPosition: DoorPosition.Up,
-				delayToMoveInMs: sunrise - now,
-			};
-		} else if (now < sunset) {
-			return {
-				targetPosition: DoorPosition.Down,
-				delayToMoveInMs: sunset - now,
-			};
-		} else {
-			const midnight = new Date(now);
-			midnight.setHours(24, 0, 0);
-			return {
-				targetPosition: DoorPosition.Up,
-				delayToMoveInMs: midnight.getTime() - now,
-			};
-		}
 	}
 }

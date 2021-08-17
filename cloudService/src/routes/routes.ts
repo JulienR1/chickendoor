@@ -13,4 +13,10 @@ router.get("/api/nextMove", async (req: Request, res: Response) => {
 	res.status(200).send(nextMove);
 });
 
+router.get("/api/daylight", async (req: Request, res: Response) => {
+	const api = new Api();
+	const daylightData = await api.daylight();
+	res.status(200).send(daylightData);
+});
+
 export default router;

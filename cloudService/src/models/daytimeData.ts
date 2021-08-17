@@ -1,3 +1,5 @@
+import { sunsetTimeOffset } from "@root/globals";
+
 export interface DaytimeAPIResult {
 	results: {
 		sunrise: string;
@@ -15,6 +17,6 @@ export class DaytimeData {
 			throw new Error("[DaytimeData]: The specified values are invalid");
 		}
 		this.sunrise = new Date(sunrise).getTime();
-		this.sunset = new Date(sunset).getTime();
+		this.sunset = new Date(sunset).getTime() + sunsetTimeOffset;
 	}
 }

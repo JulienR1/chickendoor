@@ -1,8 +1,8 @@
-import { DaytimeAPIResult } from "@root/models/daytimeData";
-import { DoorPosition } from "@shared/constants/doorPosition";
+import { DaytimeAPIResult, DaytimeData } from "@root/models/daytimeData";
 import { Response } from "node-fetch";
 
 import { Api } from "./api";
+import * as service from "./service";
 
 let api: Api;
 beforeEach(() => {
@@ -14,20 +14,66 @@ it("Should initialize", () => {
 });
 
 describe("nextMove", () => {
+	it("API-1 - Should return undefined when no daytime data is found", async () => {
+		const mockCalculate = jest.spyOn(service, "calculateNextMove");
+		jest.spyOn(api as any, "getDaytimeData").mockImplementation(() => undefined);
+
+		expect(await api.nextMove()).toBeUndefined();
+		expect(mockCalculate).not.toHaveBeenCalled();
+	});
+
+	it("API-2 - Should calculate the next move when daytime data is found", async () => {
+		const mockCalculate = jest.spyOn(service, "calculateNextMove");
+
+		const daytimeData: DaytimeData = {
+			sunrise: new Date(2000, 0, 1, 7, 0, 0).getTime(),
+			sunset: new Date(2000, 0, 1, 19, 0, 0).getTime(),
+		};
+		jest.spyOn(api as any, "getDaytimeData").mockImplementation(() => daytimeData);
+
+		await api.nextMove();
+		expect(mockCalculate).toHaveBeenCalled();
+	});
+});
+
+describe("daylight", () => {
+	it("API-3 - Should return undefined when no daytime data is found", async () => {
+		const mockCalculate = jest.spyOn(service, "calculateDaylight");
+		jest.spyOn(api as any, "getDaytimeData").mockImplementation(() => undefined);
+
+		expect(await api.daylight()).toBeUndefined();
+		expect(mockCalculate).not.toHaveBeenCalled();
+	});
+
+	it("API-4 - Should calculate the next move when daytime data is found", async () => {
+		const mockCalculate = jest.spyOn(service, "calculateDaylight");
+
+		const daytimeData: DaytimeData = {
+			sunrise: new Date(2000, 0, 1, 7, 0, 0).getTime(),
+			sunset: new Date(2000, 0, 1, 19, 0, 0).getTime(),
+		};
+		jest.spyOn(api as any, "getDaytimeData").mockImplementation(() => daytimeData);
+
+		await api.daylight();
+		expect(mockCalculate).toHaveBeenCalled();
+	});
+});
+
+describe("getDaytimeData", () => {
 	let mockFetch: jest.SpyInstance;
 
 	beforeEach(() => {
 		mockFetch = jest.spyOn(api as any, "fetchDaytimeAPIResults").mockImplementation(() => {});
 	});
 
-	it("API-1 - Should call API", async () => {
+	it("API-5 - Should call API", async () => {
 		mockFetch.mockReturnValue(undefined);
 		await api.nextMove();
 
 		expect(mockFetch).toHaveBeenCalled();
 	});
 
-	it("API-2 - Should return undefined when the API fails", () => {
+	it("API-6 - Should return undefined when the API fails", () => {
 		const returnValues: (Partial<DaytimeAPIResult> | undefined)[] = [
 			undefined,
 			{ results: undefined, status: "failed" },
@@ -36,20 +82,8 @@ describe("nextMove", () => {
 
 		returnValues.forEach(async (returnValue) => {
 			mockFetch.mockReturnValueOnce(returnValue);
-			expect(await api.nextMove()).toBe(undefined);
+			expect(await api.nextMove()).toBeUndefined();
 		});
-	});
-
-	it("API-3 - Should calculate the next move upon API reponse	", async () => {
-		const mockCalculate = jest.spyOn(api as any, "calculateNextMove").mockImplementation(() => {});
-		const fetchReturnValue: DaytimeAPIResult = {
-			status: "OK",
-			results: { sunrise: "7:00:00", sunset: "20:00:00" },
-		};
-		mockFetch.mockReturnValue(fetchReturnValue);
-
-		await api.nextMove();
-		expect(mockCalculate).toHaveBeenCalled();
 	});
 });
 
@@ -59,10 +93,10 @@ describe("fetchDaytimeAPIResults", () => {
 
 	beforeEach(() => {
 		mockFetch = jest.spyOn(api as any, "fetchDaytimeAPIResults");
-		mockFetchRemoteAPI = jest.spyOn(api as any, "fetchApi").mockImplementation(() => {});
+		mockFetchRemoteAPI = jest.spyOn(api as any, "fetchDaytimeApi").mockImplementation(() => {});
 	});
 
-	it("API-4 - Should return undefined when the fetch request fails", async () => {
+	it("API-7 - Should return undefined when the fetch request fails", async () => {
 		const fetchBadResponse: Partial<Response> = { ok: false };
 		mockFetchRemoteAPI.mockReturnValueOnce(fetchBadResponse);
 
@@ -71,7 +105,7 @@ describe("fetchDaytimeAPIResults", () => {
 		expect(await mockFetch.mock.results[0].value).toBe(undefined);
 	});
 
-	it("API-5 - Should return json data upon api request", async () => {
+	it("API-8 - Should return json data upon api request", async () => {
 		const fetchOkResponse: Partial<Response> = { ok: true, json: async () => "jsonData" };
 		mockFetchRemoteAPI.mockReturnValueOnce(fetchOkResponse);
 
@@ -79,7 +113,7 @@ describe("fetchDaytimeAPIResults", () => {
 		expect(await mockFetch.mock.results[0].value).toBe("jsonData");
 	});
 
-	it("API-6 - Should response contain the correct interface", async () => {
+	it("API-9 - Should response contain the correct interface", async () => {
 		mockFetchRemoteAPI.mockRestore();
 		await api.nextMove();
 
@@ -94,72 +128,5 @@ describe("fetchDaytimeAPIResults", () => {
 		expect(typeof apiResponse.results.sunrise).toBe("string");
 		expect(apiResponse.results.sunset).not.toBe(undefined);
 		expect(typeof apiResponse.results.sunset).toBe("string");
-	});
-});
-
-describe("calculateNextMove", () => {
-	let today: Date;
-
-	let mockNow: jest.SpyInstance;
-
-	beforeEach(() => {
-		today = new Date(2000, 0, 1);
-		const sunrise = new Date(2000, 0, 1, 7, 0, 0);
-		const sunset = new Date(2000, 0, 1, 19, 0, 0);
-
-		const fetchResponse: DaytimeAPIResult = {
-			status: "OK",
-			results: {
-				sunrise: sunrise.toISOString(),
-				sunset: sunset.toISOString(),
-			},
-		};
-
-		jest
-			.spyOn(api as any, "fetchDaytimeAPIResults")
-			.mockImplementation(() => {})
-			.mockReturnValue(fetchResponse);
-
-		mockNow = jest.spyOn(api as any, "now").mockImplementation(() => {});
-	});
-
-	it("API-7 - Should request UP before sunrise", async () => {
-		const now: Date = new Date(today);
-		now.setHours(5, 0, 0);
-		mockNow.mockReturnValue(now);
-
-		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.Up);
-	});
-
-	it("API-8 - Should request UP after sunset", async () => {
-		const now: Date = new Date(today);
-		now.setHours(20, 0, 0);
-		mockNow.mockReturnValue(now);
-
-		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.Up);
-	});
-
-	it("API-9 - Should request DOWN after sunrise and before sunset", async () => {
-		const now: Date = new Date(today);
-		now.setHours(12, 0, 0);
-		mockNow.mockReturnValue(now);
-
-		expect((await api.nextMove())?.targetPosition).toBe(DoorPosition.Down);
-	});
-
-	it("API-10 - Should correctly request update delays", async () => {
-		const now: Date = new Date(today);
-		now.setHours(6, 50, 0);
-		mockNow.mockReturnValueOnce(new Date(now));
-
-		now.setHours(18, 50, 0);
-		mockNow.mockReturnValueOnce(new Date(now));
-
-		now.setHours(19, 10, 0);
-		mockNow.mockReturnValueOnce(new Date(now));
-
-		expect((await api.nextMove())?.delayToMoveInMs).toBe(10 * 60 * 1000);
-		expect((await api.nextMove())?.delayToMoveInMs).toBe(10 * 60 * 1000);
-		expect((await api.nextMove())?.delayToMoveInMs).toBe((4 * 60 + 50) * 60 * 1000);
 	});
 });

@@ -11,19 +11,30 @@ interface IProps {
 }
 
 function IconGroup({ icons }: IProps): JSX.Element {
-	return (
-		<div className="iconGroup">
-			{icons.map((iconData, index) => (
-				<div className={classNames("icon", { "icon--dual": Array.isArray(iconData) })} key={index}>
-					{Array.isArray(iconData) ? (
-						iconData.map((icon, iconIndex) => <MaterialIcon iconName={icon.name} key={iconIndex.toString()} />)
-					) : (
-						<MaterialIcon iconName={iconData.name} />
-					)}
-				</div>
-			))}
-		</div>
-	);
+	const renderIcon = (iconData: IIcon | DualIcon, index: number) => {
+		const iconDataArray = Array.isArray(iconData) ? iconData : [iconData];
+
+		return (
+			<div
+				className={classNames(
+					"icon",
+					{ "icon--dual": Array.isArray(iconData) },
+					{ "icon--disabled": iconDataArray.every((icon) => icon.disabled) }
+				)}
+				key={index}
+			>
+				{iconDataArray.map((icon, iconIndex) => (
+					<MaterialIcon
+						iconName={icon.name}
+						classname={classNames({ "material-icons--disabled": icon.disabled })}
+						key={iconIndex.toString()}
+					/>
+				))}
+			</div>
+		);
+	};
+
+	return <div className="iconGroup">{icons.map(renderIcon)}</div>;
 }
 
 export default IconGroup;

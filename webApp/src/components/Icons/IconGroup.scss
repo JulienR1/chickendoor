@@ -20,6 +20,13 @@
 	width: var(--iconSize);
 	background-color: var(--purple);
 	border-radius: 50%;
+
+	transition: opacity var(--normalDelay) ease;
+}
+
+.icon--disabled,
+.icon .material-icons--disabled {
+	opacity: 0.5;
 }
 
 .icon .material-icons {
@@ -30,6 +37,8 @@
 	font-size: 36px;
 	color: var(--white);
 	transform: translate(-50%, -50%);
+
+	transition: opacity var(--normalDelay) ease;
 }
 
 .icon--dual .material-icons {
