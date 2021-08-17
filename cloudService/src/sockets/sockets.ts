@@ -41,15 +41,15 @@ const onDisconnect = (socketId: string, type: SocketType) => {
 	}
 };
 
-const sendToDoorSockets = (dataToSend: string, channel: SocketChannel): void => {
+const sendToDoorSockets = (dataToSend: string | null, channel: SocketChannel): void => {
 	sendToSocketList(allSocketIds.door, dataToSend, channel);
 };
 
-const sendToClientSockets = (dataToSend: string, channel: SocketChannel): void => {
+const sendToClientSockets = (dataToSend: string | null, channel: SocketChannel): void => {
 	sendToSocketList(allSocketIds.client, dataToSend, channel);
 };
 
-const sendToSocketList = (socketIdList: string[], dataToSend: string, channel: SocketChannel): void => {
+const sendToSocketList = (socketIdList: string[], dataToSend: string | null, channel: SocketChannel): void => {
 	socketIdList.forEach((socketId) => {
 		io.to(socketId).emit(channel, dataToSend);
 	});
