@@ -5,6 +5,7 @@ import { Server, ServerOptions, Socket } from "socket.io";
 import { onConnect as onClientConnect } from "./clientSocket";
 import { onConnect as onDoorConnect } from "./doorSocket";
 import { SocketType } from "./socketType";
+import { IRegisteredDoors } from "@shared/models/registeredDoors";
 
 const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };
 
@@ -26,9 +27,11 @@ const addNewSocketWithType = (socket: Socket, type: SocketType) => {
 	allSocketIds[type].push(socket.id);
 	console.log(`A socket of type '${type}' has connected`);
 
+	notifyRegisteredDoors();
 	if (type === SocketType.Door) {
 		onDoorConnect(socket);
 	} else if (type === SocketType.Client) {
+		socket.on(SocketChannel.RegisteredDoors, notifyRegisteredDoors);
 		onClientConnect(socket);
 	}
 };
@@ -38,6 +41,9 @@ const onDisconnect = (socketId: string, type: SocketType) => {
 	if (index >= 0) {
 		allSocketIds[type].splice(index, 1);
 		console.log(`A socket of type ${type}' has disconnected`);
+	}
+	if (type === SocketType.Door) {
+		notifyRegisteredDoors();
 	}
 };
 
@@ -53,6 +59,11 @@ const sendToSocketList = (socketIdList: string[], dataToSend: string | null, cha
 	socketIdList.forEach((socketId) => {
 		io.to(socketId).emit(channel, dataToSend);
 	});
+};
+
+const notifyRegisteredDoors = () => {
+	const dataToSend: IRegisteredDoors = { doorAreRegistered: allSocketIds.door.length > 0 };
+	sendToClientSockets(JSON.stringify(dataToSend), SocketChannel.RegisteredDoors);
 };
 
 export { initSocket, sendToClientSockets, sendToDoorSockets };

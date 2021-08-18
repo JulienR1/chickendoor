@@ -1,6 +1,7 @@
 import { SocketChannel } from "@shared/constants/socketChannel";
 import React, { createContext, ReactNode, ReactNodeArray, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+import { IRegisteredDoors } from "@shared/models/registeredDoors";
 
 interface IProps {
 	children: ReactNode | ReactNodeArray;
@@ -17,8 +18,13 @@ function SocketContext({ children }: IProps): JSX.Element {
 	useEffect(() => {
 		if (process.env.SERVER_ENDPOINT) {
 			const socket = io(process.env.SERVER_ENDPOINT);
+
+			socket.on(SocketChannel.RegisteredDoors, (registeredDoorsDataStr: string) => {
+				const { doorAreRegistered }: IRegisteredDoors = JSON.parse(registeredDoorsDataStr);
+				setSocket(doorAreRegistered ? socket : undefined);
+			});
+
 			socket.emit(SocketChannel.ClientConnect);
-			setSocket(socket);
 
 			return () => {
 				socket?.disconnect();
