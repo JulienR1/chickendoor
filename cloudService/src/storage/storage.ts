@@ -1,29 +1,32 @@
 import { IStoredContent } from "@root/models/storedContent";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
-import path from "path";
+import { readFileSync, writeFileSync } from "fs";
 
-const getFullPath = (filepath: string) => path.join(process.cwd(), "../data", filepath);
+import { Files } from "./files";
+import { createStorageDirIfNecessary, getFullPath, validateFilePath } from "./service";
 
-const createDirIfNecessary = (filepath: string) => {
-	if (!existsSync(getFullPath(filepath))) {
-		mkdirSync(path.join(process.cwd(), "../data"), { recursive: true });
+const writeToFile = <T>(filepath: Files, content: string): void => {
+	createStorageDirIfNecessary();
+	validateFilePath(filepath);
+
+	const originalContentStr = readFileSync(getFullPath(filepath), "utf8");
+	const originalContent: T = JSON.parse(originalContentStr || "{}").new;
+
+	if (content && originalContent) {
+		const parsedContent: T = JSON.parse(content);
+		const newContent: IStoredContent<T | Record<string, unknown>> = { new: parsedContent, old: originalContent || {} };
+		writeFileSync(getFullPath(filepath), JSON.stringify(newContent));
+	} else {
+		throw new Error("The previously saved data or the new data was invalid.");
 	}
 };
 
-const writeToFile = <T>(filepath: string, content: string): void => {
-	createDirIfNecessary(filepath);
-	const originalContentStr = readFile(filepath);
-	const originalContent: T = JSON.parse(originalContentStr || "{}").new;
+const readFile = (filepath: Files): string => {
+	createStorageDirIfNecessary();
+	validateFilePath(filepath);
 
-	const parsedContent: T = JSON.parse(content);
-	const newContent: IStoredContent<T | Record<string, unknown>> = { new: parsedContent, old: originalContent || {} };
-	writeFileSync(getFullPath(filepath), JSON.stringify(newContent));
-};
-
-const readFile = (filepath: string): string => {
-	createDirIfNecessary(filepath);
 	try {
-		return readFileSync(getFullPath(filepath), "utf8");
+		const readData = readFileSync(getFullPath(filepath), "utf8");
+		return JSON.stringify(JSON.parse(readData));
 	} catch (exception) {
 		return "";
 	}

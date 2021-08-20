@@ -1,11 +1,11 @@
 import { SocketChannel } from "@shared/constants/socketChannel";
+import { IRegisteredDoors } from "@shared/models/registeredDoors";
 import http from "http";
 import { Server, ServerOptions, Socket } from "socket.io";
 
 import { onConnect as onClientConnect } from "./clientSocket";
 import { onConnect as onDoorConnect } from "./doorSocket";
 import { SocketType } from "./socketType";
-import { IRegisteredDoors } from "@shared/models/registeredDoors";
 
 const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };
 

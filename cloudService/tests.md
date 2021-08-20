@@ -1,6 +1,7 @@
 # Unit tests
 
-#### src/api/api.ts
+<details>
+<summary><b>src/api/api.ts</b></summary>
 
 | Function               | Test ID | Name                                                      | Additional Info                              |
 | ---------------------- | ------- | --------------------------------------------------------- | -------------------------------------------- |
@@ -14,7 +15,10 @@
 |                        | API-8   | Should return json data upon api request                  | Confirm the provided structure by node-fetch |
 |                        | API-9   | Should response contain the correct interface             | Validate planned behavior for the api        |
 
-#### src/api/service.ts
+</details>
+
+<details>
+<summary><b>src/api/service.ts</b></summary>
 
 | Function          | Test ID | Name                                                       | Additional Info |
 | ----------------- | ------- | ---------------------------------------------------------- | --------------- |
@@ -27,10 +31,42 @@
 |                   | API-S-7 | Should not flag as DAY after the sunset                    |                 |
 |                   | API-S-8 | Should calculate corect delays for next update             |                 |
 
-#### src/models/daytimeData.ts
+</details>
+
+<details>
+<summary><b>src/models/daytimeData.ts</b></summary>
 
 | Function    | Test ID | Name                                             | Additional Info                                                  |
 | ----------- | ------- | ------------------------------------------------ | ---------------------------------------------------------------- |
 | constructor | DD-1    | Should correctly convert from ISO string to date | The used api returns data in this format                         |
 |             | DD-2    | Should throw an error when the dates are invalid |                                                                  |
 |             | DD-3    | Should add the correct offset to the sunset      | The delay is to give a margin for the chickens to enter at night |
+
+</details>
+
+<details>
+<summary><b>src/storage/storage.ts</b></summary>
+
+| Function    | Test ID | Name                                                                                      | Additional Info |
+| ----------- | ------- | ----------------------------------------------------------------------------------------- | --------------- |
+| writeToFile | STO-1   | Should add data to a file in the "new" section and move the old data in the "old" section |                 |
+|             | STO-2   | Should set the "old" section to "{}" if there was no prior data                           |                 |
+|             | STO-3   | Should validate the file path before writing                                              |                 |
+|             | STO-4   | Should throw an error if there was an error when parsing the data                         |
+| readFile    | STO-5   | Should validate the file path before reading                                              |                 |
+|             | STO-6   | Should return an empty string if there is no data or no file                              |                 |
+|             | STO-7   | Should return the correct data upon read                                                  |                 |
+
+</details>
+
+<details>
+<summary><b>src/storage/service.ts</b></summary>
+
+| Function                    | Test ID | Name                                                    | Additional Info                                 |
+| --------------------------- | ------- | ------------------------------------------------------- | ----------------------------------------------- |
+| createStorageDirIfNecessary | STO-S-1 | Should create the storage directory if it is missing    |                                                 |
+|                             | STO-S-2 | Should skip directory creation if it is already created |                                                 |
+| validateFilePath            | STO-S-3 | Should accept file from the white list                  | Files need to be registered in the "Files" enum |
+|                             | STO-S-4 | Should throw an error when a random filepath is passed  |                                                 |
+
+</details>
