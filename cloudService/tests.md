@@ -47,15 +47,15 @@
 <details>
 <summary><b>src/storage/storage.ts</b></summary>
 
-| Function    | Test ID | Name                                                                                      | Additional Info |
-| ----------- | ------- | ----------------------------------------------------------------------------------------- | --------------- |
-| writeToFile | STO-1   | Should add data to a file in the "new" section and move the old data in the "old" section |                 |
-|             | STO-2   | Should set the "old" section to "{}" if there was no prior data                           |                 |
-|             | STO-3   | Should validate the file path before writing                                              |                 |
-|             | STO-4   | Should throw an error if there was an error when parsing the data                         |
-| readFile    | STO-5   | Should validate the file path before reading                                              |                 |
-|             | STO-6   | Should return an empty string if there is no data or no file                              |                 |
-|             | STO-7   | Should return the correct data upon read                                                  |                 |
+| Function       | Test ID | Name                                                                                      | Additional Info |
+| -------------- | ------- | ----------------------------------------------------------------------------------------- | --------------- |
+| writeToFile    | STO-1   | Should add data to a file in the "new" section and move the old data in the "old" section |                 |
+|                | STO-2   | Should set the "old" section to "{}" if there was no prior data                           |                 |
+|                | STO-3   | Should validate the file path before writing                                              |                 |
+|                | STO-4   | Should throw an error if there was an error when parsing the data                         |
+| readFileAsJSON | STO-5   | Should validate the file path before reading                                              |                 |
+|                | STO-6   | Should return undefined if there is no data or no file                                    |                 |
+|                | STO-7   | Should return the correct data as JSON upon read                                          |                 |
 
 </details>
 
@@ -68,5 +68,19 @@
 |                             | STO-S-2 | Should skip directory creation if it is already created |                                                 |
 | validateFilePath            | STO-S-3 | Should accept file from the white list                  | Files need to be registered in the "Files" enum |
 |                             | STO-S-4 | Should throw an error when a random filepath is passed  |                                                 |
+
+</details>
+
+<details>
+<summary><b>src/sockets/client/service.ts</b></summary>
+
+| Function             | Test ID  | Name                                                                                | Additional Info                                               |
+| -------------------- | -------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| updateClientDoorData | SOCC-S-1 | Should not send data if the received data is not defined                            | The data is directly read from a file and should be validated |
+|                      | SOCC-S-2 | Should not send data if the received data is not the correct format                 |                                                               |
+|                      | SOCC-S-3 | Should notify all client sockets of a change                                        |                                                               |
+| requestNewDoorData   | SOCC-S-4 | Should request a data update if the previous data is invalid                        | Invalid means that it was not properly saved; let's try again |
+|                      | SOCC-S-5 | Should not request an update if the last update was made before or on the set delay |                                                               |
+|                      | SOCC-S-6 | Should request an update if the last update was made after the set delay            |                                                               |
 
 </details>

@@ -3,7 +3,7 @@ import { IRegisteredDoors } from "@shared/models/registeredDoors";
 import http from "http";
 import { Server, ServerOptions, Socket } from "socket.io";
 
-import { onConnect as onClientConnect } from "./clientSocket";
+import { onConnect as onClientConnect } from "./client";
 import { onConnect as onDoorConnect } from "./doorSocket";
 import { SocketType } from "./socketType";
 

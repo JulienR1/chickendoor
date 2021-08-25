@@ -3,7 +3,7 @@ import fs from "fs";
 
 import { Files } from "./files";
 import * as storageService from "./service";
-import { readFile, writeToFile } from "./storage";
+import { readFileAsJSON, writeToFile } from "./storage";
 
 jest.mock("fs", () => ({
 	mkdirSync: jest.fn(),
@@ -72,7 +72,7 @@ describe("writeToFile", () => {
 	});
 });
 
-describe("readFile", () => {
+describe("readFileAsJSON", () => {
 	beforeEach(() => {
 		(storageService.validateFilePath as any).mockReset();
 	});
@@ -80,19 +80,19 @@ describe("readFile", () => {
 	it("STO-5 - Should validate the file path before reading", () => {
 		const validateSpy = jest.spyOn(storageService, "validateFilePath");
 
-		readFile(Files.DoorData);
+		readFileAsJSON(Files.DoorData);
 		expect(validateSpy).toHaveBeenCalled();
 	});
 
-	it("STO-6 - Should return an empty string if there is no data or no file", () => {
+	it("STO-6 - Should return an undefined if there is no data or no file", () => {
 		(storageService.validateFilePath as any).mockImplementation(() => {});
-		expect(readFile("invalid-path-to-no-file.json" as Files)).toBe("");
+		expect(readFileAsJSON("invalid-path-to-no-file.json" as Files)).toBeUndefined();
 	});
 
 	it("STO-7 - Should return the correct data upon read", () => {
 		const expectedData = { value: 1, valueTwo: 2 };
 
 		(fs.readFileSync as any).mockReturnValue(JSON.stringify(expectedData));
-		expect(readFile(Files.DoorData)).toBe(JSON.stringify(expectedData));
+		expect(readFileAsJSON(Files.DoorData)).toEqual(expectedData);
 	});
 });

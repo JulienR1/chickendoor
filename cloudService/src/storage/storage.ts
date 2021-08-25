@@ -20,16 +20,15 @@ const writeToFile = <T>(filepath: Files, content: string): void => {
 	}
 };
 
-const readFile = (filepath: Files): string => {
+const readFileAsJSON = <T>(filepath: Files): IStoredContent<T> | undefined => {
 	createStorageDirIfNecessary();
 	validateFilePath(filepath);
 
 	try {
-		const readData = readFileSync(getFullPath(filepath), "utf8");
-		return JSON.stringify(JSON.parse(readData));
+		return JSON.parse(readFileSync(getFullPath(filepath), "utf8"));
 	} catch (exception) {
-		return "";
+		return undefined;
 	}
 };
 
-export { readFile, writeToFile };
+export { readFileAsJSON, writeToFile };
