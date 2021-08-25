@@ -1,11 +1,10 @@
 import * as constants from "@root/globals";
 import { IStoredContent } from "@root/models/storedContent";
-import { DoorMode } from "@shared/constants/doorMode";
-import { DoorPosition } from "@shared/constants/doorPosition";
 import { SocketChannel } from "@shared/constants/socketChannel";
 import { DoorData } from "@shared/models/doorData";
 import MockDate from "mockdate";
 
+import { fillerDoorData } from "../mock";
 import * as sockets from "../sockets";
 import { requestNewDoorData, updateClientDoorData } from "./service";
 
@@ -14,21 +13,6 @@ jest.mock("../sockets", () => ({
 	sendToClientSockets: jest.fn().mockImplementation(() => {}),
 	sendToDoorSockets: jest.fn().mockImplementation(() => {}),
 }));
-
-const fillerDoorData: IStoredContent<DoorData> = {
-	new: {
-		position: DoorPosition.Up,
-		mode: DoorMode.Automatic,
-		timeToNextUpdate: 10000,
-		timestamp: new Date(),
-	},
-	old: {
-		position: DoorPosition.Down,
-		mode: DoorMode.Manual,
-		timeToNextUpdate: 10000,
-		timestamp: new Date(),
-	},
-};
 
 describe("updateClientDoorData", () => {
 	it("SOCC-S-1 - Should not send data if the received data is not defined", () => {

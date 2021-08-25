@@ -4,7 +4,7 @@ import http from "http";
 import { Server, ServerOptions, Socket } from "socket.io";
 
 import { onConnect as onClientConnect } from "./client";
-import { onConnect as onDoorConnect } from "./doorSocket";
+import { onConnect as onDoorConnect } from "./door";
 import { SocketType } from "./socketType";
 
 const socketSettings: Partial<ServerOptions> = { cors: { credentials: true } };

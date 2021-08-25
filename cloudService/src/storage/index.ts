@@ -1,3 +1,3 @@
-import { readFile, writeToFile } from "./storage";
+import { readFileAsJSON, writeToFile } from "./storage";
 
-export { readFile, writeToFile };
+export { readFileAsJSON, writeToFile };

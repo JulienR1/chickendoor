@@ -5,13 +5,13 @@ import { DoorData } from "@shared/models/doorData";
 
 import { sendToClientSockets, sendToDoorSockets } from "../sockets";
 
-const updateClientDoorData = (doorData: IStoredContent<DoorData> | undefined) => {
+const updateClientDoorData = (doorData: IStoredContent<DoorData> | undefined): void => {
 	if (doorData?.new) {
 		sendToClientSockets(JSON.stringify(doorData), SocketChannel.NotifyDoorState);
 	}
 };
 
-const requestNewDoorData = (oldDoorData: IStoredContent<DoorData> | undefined) => {
+const requestNewDoorData = (oldDoorData: IStoredContent<DoorData> | undefined): void => {
 	if (oldDoorData?.new.timestamp) {
 		const elapsedTime = Date.now() - new Date(oldDoorData?.new.timestamp).getTime();
 
@@ -23,4 +23,4 @@ const requestNewDoorData = (oldDoorData: IStoredContent<DoorData> | undefined) =
 	sendToDoorSockets(null, SocketChannel.RequestDoorState);
 };
 
-export { requestNewDoorData,updateClientDoorData };
+export { requestNewDoorData, updateClientDoorData };

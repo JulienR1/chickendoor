@@ -84,3 +84,14 @@
 |                      | SOCC-S-6 | Should request an update if the last update was made after the set delay            |                                                               |
 
 </details>
+
+<details>
+<summary><b>src/sockets/door/service.ts</b></summary>
+
+| Function        | Test ID  | Name                                             | Additional Info |
+| --------------- | -------- | ------------------------------------------------ | --------------- |
+| saveNewDoorData | SOCD-S-1 | Should sanitize the provided data                |                 |
+|                 | SOCD-S-2 | Should print an error when the data is not valid |                 |
+|                 | SOCD-S-3 | Sould write to file and notify all clients       |                 |
+
+</details>
