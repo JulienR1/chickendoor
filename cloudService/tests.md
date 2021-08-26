@@ -95,3 +95,33 @@
 |                 | SOCD-S-3 | Sould write to file and notify all clients       |                 |
 
 </details>
+
+<details>
+<summary><b>src/sockets</b></summary>
+
+#### <b>./sockets.ts</b>
+
+| Function            | Test ID | Name                                                                     | Additional Info |
+| ------------------- | ------- | ------------------------------------------------------------------------ | --------------- |
+| sendToDoorSockets   | SOC-1   | Should call `sendToSocketList()` with only the registered door sockets   |                 |
+| sendToClientSockets | SOC-2   | Should call `sendToSocketList()` with only the registered client sockets |                 |
+
+#### <b>./service.ts</b>
+
+| Function              | Test ID  | Name                                                                             | Additional Info |
+| --------------------- | -------- | -------------------------------------------------------------------------------- | --------------- |
+| addNewSocketWithType  | SOC-S-1  | Should throw an error if the provided socket is undefined                        |                 |
+|                       | SOC-S-2  | Should register the new socket in the sockets list                               |                 |
+|                       | SOC-S-3  | Should request a door state notification                                         |                 |
+|                       | SOC-S-4  | Should call the proper socket type onConnect method                              |                 |
+|                       | SOC-S-5  | Should bind the client socket to door notifications                              |                 |
+| onDisconnect          | SOC-S-6  | Should not modify the socket list if the socket cannot be found                  |                 |
+|                       | SOC-S-7  | Should remove the socket from the list if it was found                           |                 |
+|                       | SOC-S-8  | Should trigger a door event if the socket is a door socket                       |                 |
+|                       | SOC-S-9  | Should not trigger a door event if the socket is a client socket                 |                 |
+| sendToSocketList      | SOC-S-10 | Should emit the provided data to all the provided sockets on the correct channel |                 |
+|                       | SOC-S-11 | Should not emit anything if no sockets are provided                              |                 |
+| notifyRegisteredDoors | SOC-S-12 | Should correctly determine if a door is registered                               |                 |
+|                       | SOC-S-13 | Should notify all clients                                                        |                 |
+
+</details>

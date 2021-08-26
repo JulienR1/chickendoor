@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 import express, { Application } from "express";
 import http from "http";
 
-import router from "./routes/routes";
-import { initSocket } from "./sockets/sockets";
+import router from "./routes";
+import { initSocket } from "./sockets";
 
 if (process.env.NODE_ENV !== "production") {
 	const result = dotenv.config();
