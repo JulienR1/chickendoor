@@ -1,7 +1,9 @@
 # Unit tests
 
 <details>
-<summary><b>src/api/api.ts</b></summary>
+<summary><b>src/api</b></summary>
+
+#### <b>./api.ts</b>
 
 | Function               | Test ID | Name                                                      | Additional Info                              |
 | ---------------------- | ------- | --------------------------------------------------------- | -------------------------------------------- |
@@ -15,10 +17,7 @@
 |                        | API-8   | Should return json data upon api request                  | Confirm the provided structure by node-fetch |
 |                        | API-9   | Should response contain the correct interface             | Validate planned behavior for the api        |
 
-</details>
-
-<details>
-<summary><b>src/api/service.ts</b></summary>
+#### <b>./service.ts</b>
 
 | Function          | Test ID | Name                                                       | Additional Info |
 | ----------------- | ------- | ---------------------------------------------------------- | --------------- |
@@ -45,7 +44,9 @@
 </details>
 
 <details>
-<summary><b>src/storage/storage.ts</b></summary>
+<summary><b>src/storage</b></summary>
+
+#### <b>./storage.ts</b>
 
 | Function       | Test ID | Name                                                                                      | Additional Info |
 | -------------- | ------- | ----------------------------------------------------------------------------------------- | --------------- |
@@ -57,10 +58,7 @@
 |                | STO-6   | Should return undefined if there is no data or no file                                    |                 |
 |                | STO-7   | Should return the correct data as JSON upon read                                          |                 |
 
-</details>
-
-<details>
-<summary><b>src/storage/service.ts</b></summary>
+#### <b>./service.ts</b>
 
 | Function                    | Test ID | Name                                                    | Additional Info                                 |
 | --------------------------- | ------- | ------------------------------------------------------- | ----------------------------------------------- |

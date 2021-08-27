@@ -7,7 +7,7 @@ import { sendToClientSockets, sendToDoorSockets } from "../sockets";
 
 const updateClientDoorData = (doorData: IStoredContent<DoorData> | undefined): void => {
 	if (doorData?.new) {
-		sendToClientSockets(JSON.stringify(doorData), SocketChannel.NotifyDoorState);
+		sendToClientSockets(JSON.stringify(doorData.new), SocketChannel.NotifyDoorState);
 	}
 };
 

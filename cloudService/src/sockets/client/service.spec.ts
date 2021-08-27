@@ -30,7 +30,7 @@ describe("updateClientDoorData", () => {
 
 	it("SOCC-S-3 - Should notify all client sockets of a change", () => {
 		updateClientDoorData(fillerDoorData);
-		expect(sendSpy).toHaveBeenCalledWith(JSON.stringify(fillerDoorData), SocketChannel.NotifyDoorState);
+		expect(sendSpy).toHaveBeenCalledWith(JSON.stringify(fillerDoorData.new), SocketChannel.NotifyDoorState);
 	});
 });
 
